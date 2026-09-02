@@ -1,14 +1,15 @@
 {
   "name": "base-contracts",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Eleven standalone Solidity contracts and a minimal deploy script for Base",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "compile": "node compile.js",
+    "test": "node --test test/",
+    "deploy": "node deploy.js --network base"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "type": "commonjs",
   "dependencies": {
     "ethers": "^6.17.0",
