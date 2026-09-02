@@ -1,0 +1,4 @@
+node_modules/
+abi/
+package-lock.json
+deployments.*.json
