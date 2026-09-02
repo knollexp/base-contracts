@@ -4,7 +4,7 @@
   "description": "Eleven standalone Solidity contracts and a minimal deploy script for Base",
   "scripts": {
     "compile": "node compile.js",
-    "test": "node --test test/",
+    "test": "node --test \"test/*.test.js\"",
     "deploy": "node deploy.js --network base"
   },
   "keywords": [],
