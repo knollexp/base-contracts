@@ -29,25 +29,34 @@ node compile.js
 
 ## Deploy
 
-The script is a dry run unless you pass `--yes`. It never stores your key; it
-reads `PRIVATE_KEY` from the environment for the duration of the run.
+The script is a dry run unless you pass `--yes`.
+
+Put your key in `.env`, which is gitignored and never committed:
+
+```
+PRIVATE_KEY=0x...
+```
+
+The script loads that file automatically. A `PRIVATE_KEY` already set in the
+real environment takes precedence, so you can also pass it inline for a single
+run and leave nothing on disk.
 
 Dry run against Base mainnet (prints gas estimates and cost, sends nothing):
 
 ```
-PRIVATE_KEY=0x... node deploy.js --network base
+node deploy.js --network base
 ```
 
 Rehearse on Base Sepolia:
 
 ```
-PRIVATE_KEY=0x... node deploy.js --network sepolia --yes
+node deploy.js --network sepolia --yes
 ```
 
 Broadcast to Base mainnet:
 
 ```
-PRIVATE_KEY=0x... node deploy.js --network base --yes
+node deploy.js --network base --yes
 ```
 
 Addresses and tx hashes are written to `deployments.<network>.json`, which is

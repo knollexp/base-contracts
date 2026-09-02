@@ -3,6 +3,13 @@ const path = require("path");
 const { ethers } = require("ethers");
 const { compileAll } = require("./compile");
 
+// Load .env if present (Node >= 20.12 builtin, no dependency). Values already
+// set in the real environment win, so an inline PRIVATE_KEY=... still works.
+const ENV_FILE = path.join(__dirname, ".env");
+if (fs.existsSync(ENV_FILE)) {
+  process.loadEnvFile(ENV_FILE);
+}
+
 const NETWORKS = {
   base: {
     chainId: 8453n,
@@ -15,6 +22,8 @@ const NETWORKS = {
     explorer: "https://sepolia.basescan.org",
   },
 };
+
+let activeProvider = null;
 
 function parseArgs(argv) {
   const args = { network: "base", broadcast: false };
@@ -34,9 +43,12 @@ async function main() {
   const net = NETWORKS[args.network];
 
   const pk = process.env.PRIVATE_KEY;
-  if (!pk) throw new Error("PRIVATE_KEY is not set. Set it in the shell for this run only.");
+  if (!pk || pk.includes("HIER_DEINEN_KEY")) {
+    throw new Error("PRIVATE_KEY is not set. Put it in .env (gitignored) or set it in the shell.");
+  }
 
   const provider = new ethers.JsonRpcProvider(net.rpc);
+  activeProvider = provider;
   const wallet = new ethers.Wallet(pk.startsWith("0x") ? pk : "0x" + pk, provider);
 
   const chain = await provider.getNetwork();
@@ -113,7 +125,13 @@ async function main() {
   console.log(`Verify on explorer: ${net.explorer}/address/${wallet.address}`);
 }
 
-main().catch((err) => {
-  console.error(`\nERROR: ${err.message}`);
-  process.exit(1);
-});
+main()
+  .catch((err) => {
+    console.error(`\nERROR: ${err.message}`);
+    process.exitCode = 1;
+  })
+  .finally(() => {
+    // Close the RPC socket so the process exits on its own instead of being
+    // torn down mid-flight by process.exit().
+    if (activeProvider) activeProvider.destroy();
+  });
