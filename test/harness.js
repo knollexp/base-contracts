@@ -1,10 +1,16 @@
 const { createVM } = require("@ethereumjs/vm");
+const { createBlock } = require("@ethereumjs/block");
 const { Common, Mainnet, Hardfork } = require("@ethereumjs/common");
 const { Address, hexToBytes, bytesToHex } = require("@ethereumjs/util");
 const { ethers } = require("ethers");
 const { compileAll } = require("../compile");
 
 const GAS_LIMIT = 30_000_000n;
+
+// A fresh VM reports block.timestamp as 0, which silently breaks any contract
+// that treats a zero timestamp as "unset". Start the chain at a plausible time
+// instead and let tests move it forward.
+const GENESIS_TIMESTAMP = 1_700_000_000n;
 
 // Compiling is the slow part, so do it once for the whole test run.
 let artifactCache = null;
@@ -67,6 +73,7 @@ class Contract {
       origin: caller,
       to: this.address,
       gasLimit: GAS_LIMIT,
+      block: this.chain.block(),
       data: hexToBytes(this.iface.encodeFunctionData(fn, args)),
     });
     const exec = res.execResult;
@@ -92,6 +99,20 @@ class Contract {
 class TestChain {
   constructor(vm) {
     this.vm = vm;
+    this.timestamp = GENESIS_TIMESTAMP;
+    this.blockNumber = 1n;
+  }
+
+  /** The block context handed to every call, so block.timestamp is sane. */
+  block() {
+    return createBlock({ header: { number: this.blockNumber, timestamp: this.timestamp } });
+  }
+
+  /** Moves the chain forward, for tests that depend on elapsed time. */
+  warp(seconds) {
+    this.timestamp += BigInt(seconds);
+    this.blockNumber += 1n;
+    return this.timestamp;
   }
 
   static async create() {
@@ -108,6 +129,7 @@ class TestChain {
       caller: deployer,
       origin: deployer,
       gasLimit: GAS_LIMIT,
+      block: this.block(),
       data: hexToBytes(artifact.bytecode),
     });
     if (res.execResult.exceptionError) {
@@ -117,4 +139,4 @@ class TestChain {
   }
 }
 
-module.exports = { TestChain, account, GAS_LIMIT };
+module.exports = { TestChain, account, GAS_LIMIT, GENESIS_TIMESTAMP };
