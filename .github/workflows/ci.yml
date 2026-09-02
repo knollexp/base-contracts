@@ -21,3 +21,29 @@ jobs:
       - run: npm ci
       - run: npm run compile
       - run: npm test
+
+  format:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run format:check
+
+  abi:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      # The checked-in ABIs are what consumers read, so a contract change that
+      # does not regenerate them ships an interface that no longer matches.
+      - run: npm run abi
+      - name: Fail if the exported ABIs are stale
+        run: git diff --exit-code -- abi/
