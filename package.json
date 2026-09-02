@@ -5,7 +5,9 @@
   "scripts": {
     "compile": "node compile.js",
     "test": "node --test \"test/*.test.js\"",
-    "deploy": "node deploy.js --network base"
+    "deploy": "node deploy.js --network base",
+    "abi": "node scripts/export-abi.js",
+    "gas": "node scripts/gas-report.js"
   },
   "keywords": [],
   "author": "",
