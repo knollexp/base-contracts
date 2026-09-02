@@ -27,12 +27,16 @@ describe("Whitelist", () => {
   });
 
   test("rejects allow from a non-owner", async () => {
-    const reason = await whitelist.expectRevert("allow", [account(4).toString()], { from: stranger });
+    const reason = await whitelist.expectRevert("allow", [account(4).toString()], {
+      from: stranger,
+    });
     assert.equal(reason, "Whitelist: not owner");
   });
 
   test("rejects revoke from a non-owner", async () => {
-    const reason = await whitelist.expectRevert("revoke", [account(4).toString()], { from: stranger });
+    const reason = await whitelist.expectRevert("revoke", [account(4).toString()], {
+      from: stranger,
+    });
     assert.equal(reason, "Whitelist: not owner");
   });
 
@@ -44,7 +48,10 @@ describe("Whitelist", () => {
   });
 
   test("refuses to transfer ownership to the zero address", async () => {
-    assert.equal(await whitelist.expectRevert("transferOwnership", [ZERO]), "Whitelist: zero owner");
+    assert.equal(
+      await whitelist.expectRevert("transferOwnership", [ZERO]),
+      "Whitelist: zero owner"
+    );
   });
 
   test("emits Allowed and Revoked", async () => {

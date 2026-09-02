@@ -6,19 +6,19 @@ non-payable and has an argument-less constructor.
 
 ## Contracts
 
-| Contract | Purpose |
-| --- | --- |
-| `Greeter` | Stores a greeting string, emits on change |
-| `Counter` | Increment / decrement with underflow guard |
-| `KeyValueStore` | Per-address `bytes32 -> string` storage |
-| `Guestbook` | Append-only signed messages, 280 char limit |
-| `NameRegistry` | One-name-per-address claim and release |
-| `TodoList` | Per-address task list with completion flag |
-| `Poll` | One-vote-per-address yes/no poll |
-| `Whitelist` | Owner-managed allowlist with ownership transfer |
-| `VersionLog` | Monotonically increasing semver release log |
-| `Attestation` | Timestamped digest attestations, duplicate-guarded |
-| `BuilderBadge` | One-time non-transferable claim record |
+| Contract        | Purpose                                            |
+| --------------- | -------------------------------------------------- |
+| `Greeter`       | Stores a greeting string, emits on change          |
+| `Counter`       | Increment / decrement with underflow guard         |
+| `KeyValueStore` | Per-address `bytes32 -> string` storage            |
+| `Guestbook`     | Append-only signed messages, 280 char limit        |
+| `NameRegistry`  | One-name-per-address claim and release             |
+| `TodoList`      | Per-address task list with completion flag         |
+| `Poll`          | One-vote-per-address yes/no poll                   |
+| `Whitelist`     | Owner-managed allowlist with ownership transfer    |
+| `VersionLog`    | Monotonically increasing semver release log        |
+| `Attestation`   | Timestamped digest attestations, duplicate-guarded |
+| `BuilderBadge`  | One-time non-transferable claim record             |
 
 ## Setup
 

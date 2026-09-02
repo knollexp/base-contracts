@@ -19,7 +19,9 @@ contract Counter {
     /// @dev Wrapped in unchecked because reaching 2**256-1 by single
     ///      increments is not reachable in practice.
     function increment() external {
-        unchecked { count++; }
+        unchecked {
+            count++;
+        }
         emit Counted(msg.sender, count);
     }
 
@@ -27,7 +29,9 @@ contract Counter {
     /// @dev Reverts rather than wrapping around when the counter is zero.
     function decrement() external {
         require(count > 0, "Counter: underflow");
-        unchecked { count--; }
+        unchecked {
+            count--;
+        }
         emit Counted(msg.sender, count);
     }
 }

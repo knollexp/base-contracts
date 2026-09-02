@@ -9,7 +9,10 @@ const CONTRACTS_DIR = path.join(__dirname, "contracts");
 const MAX_CONTRACT_SIZE = 24576;
 
 function compileAll() {
-  const files = fs.readdirSync(CONTRACTS_DIR).filter((f) => f.endsWith(".sol")).sort();
+  const files = fs
+    .readdirSync(CONTRACTS_DIR)
+    .filter((f) => f.endsWith(".sol"))
+    .sort();
 
   const sources = {};
   for (const file of files) {

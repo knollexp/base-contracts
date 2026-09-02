@@ -35,7 +35,10 @@ describe("BuilderBadge", () => {
 
   test("rejects a second claim from the same address", async () => {
     await badge.send("claim", [], { from: account(1) });
-    assert.equal(await badge.expectRevert("claim", [], { from: account(1) }), "Badge: already claimed");
+    assert.equal(
+      await badge.expectRevert("claim", [], { from: account(1) }),
+      "Badge: already claimed"
+    );
   });
 
   test("does not increase the total on a rejected claim", async () => {

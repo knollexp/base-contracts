@@ -53,7 +53,9 @@ async function main() {
 
   const chain = await provider.getNetwork();
   if (chain.chainId !== net.chainId) {
-    throw new Error(`RPC reports chainId ${chain.chainId}, expected ${net.chainId} for "${args.network}"`);
+    throw new Error(
+      `RPC reports chainId ${chain.chainId}, expected ${net.chainId} for "${args.network}"`
+    );
   }
 
   const artifacts = compileAll();
@@ -100,7 +102,9 @@ async function main() {
     await contract.waitForDeployment();
     const address = await contract.getAddress();
     const receipt = await provider.getTransactionReceipt(tx.hash);
-    console.log(`  ${"".padEnd(16)} -> ${address}  (block ${receipt.blockNumber}, gas used ${receipt.gasUsed})\n`);
+    console.log(
+      `  ${"".padEnd(16)} -> ${address}  (block ${receipt.blockNumber}, gas used ${receipt.gasUsed})\n`
+    );
     deployments.push({
       name: a.name,
       address,
@@ -114,7 +118,13 @@ async function main() {
   fs.writeFileSync(
     outPath,
     JSON.stringify(
-      { network: args.network, chainId: Number(net.chainId), deployer: wallet.address, deployedAt: new Date().toISOString(), contracts: deployments },
+      {
+        network: args.network,
+        chainId: Number(net.chainId),
+        deployer: wallet.address,
+        deployedAt: new Date().toISOString(),
+        contracts: deployments,
+      },
       null,
       2
     ) + "\n"

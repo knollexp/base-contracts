@@ -10,7 +10,11 @@ const { ethers } = require("ethers");
  * so each scenario runs against a freshly deployed contract.
  */
 const SCENARIOS = [
-  { contract: "Attestation", label: "attest", run: (c) => c.send("attest", ["0x" + "11".repeat(32)]) },
+  {
+    contract: "Attestation",
+    label: "attest",
+    run: (c) => c.send("attest", ["0x" + "11".repeat(32)]),
+  },
   { contract: "BuilderBadge", label: "claim", run: (c) => c.send("claim") },
   { contract: "Counter", label: "increment", run: (c) => c.send("increment") },
   { contract: "Greeter", label: "setGreeting", run: (c) => c.send("setGreeting", ["gm"]) },
@@ -96,7 +100,9 @@ if (require.main === module) {
       fs.mkdirSync(path.dirname(out), { recursive: true });
       fs.writeFileSync(out, render(rows));
       for (const r of rows) {
-        console.log(`  ${r.contract.padEnd(16)} ${r.label.padEnd(14)} ${String(r.gas).padStart(7)} gas`);
+        console.log(
+          `  ${r.contract.padEnd(16)} ${r.label.padEnd(14)} ${String(r.gas).padStart(7)} gas`
+        );
       }
       console.log(`\nWrote ${path.relative(process.cwd(), out)}`);
     })

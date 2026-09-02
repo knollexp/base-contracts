@@ -14,18 +14,18 @@ Figures cover L2 execution only. On Base each transaction also carries an L1
 data fee that depends on calldata size and L1 conditions, and is not
 measurable from an in-process EVM.
 
-| Contract | Call | Gas | Deployed size (bytes) |
-| --- | --- | --- | --- |
-| `Attestation` | `attest()` | 24559 | 627 |
-| `BuilderBadge` | `claim()` | 68830 | 833 |
-| `Counter` | `increment()` | 23734 | 392 |
-| `Greeter` | `setGreeting()` | 5849 | 1479 |
-| `Guestbook` | `sign()` | 70250 | 1571 |
-| `KeyValueStore` | `set()` | 25510 | 1130 |
-| `NameRegistry` | `register()` | 46467 | 880 |
-| `Poll` | `vote()` | 46555 | 1475 |
-| `TodoList` | `addTask()` | 50387 | 1762 |
-| `VersionLog` | `publish()` | 70224 | 2013 |
-| `Whitelist` | `allow()` | 23834 | 929 |
+| Contract        | Call            | Gas   | Deployed size (bytes) |
+| --------------- | --------------- | ----- | --------------------- |
+| `Attestation`   | `attest()`      | 24559 | 627                   |
+| `BuilderBadge`  | `claim()`       | 68830 | 833                   |
+| `Counter`       | `increment()`   | 23734 | 392                   |
+| `Greeter`       | `setGreeting()` | 5849  | 1479                  |
+| `Guestbook`     | `sign()`        | 70250 | 1571                  |
+| `KeyValueStore` | `set()`         | 25510 | 1130                  |
+| `NameRegistry`  | `register()`    | 46467 | 880                   |
+| `Poll`          | `vote()`        | 46555 | 1475                  |
+| `TodoList`      | `addTask()`     | 50387 | 1762                  |
+| `VersionLog`    | `publish()`     | 70224 | 2013                  |
+| `Whitelist`     | `allow()`       | 23834 | 929                   |
 
 Regenerate with `npm run gas`.

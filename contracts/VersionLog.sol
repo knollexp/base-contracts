@@ -43,8 +43,8 @@ contract VersionLog {
             Release storage last = _releases[_releases.length - 1];
             require(
                 major > last.major ||
-                (major == last.major && minor > last.minor) ||
-                (major == last.major && minor == last.minor && patch > last.patch),
+                    (major == last.major && minor > last.minor) ||
+                    (major == last.major && minor == last.minor && patch > last.patch),
                 "VersionLog: not newer"
             );
         }

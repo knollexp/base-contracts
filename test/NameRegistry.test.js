@@ -58,7 +58,10 @@ describe("NameRegistry", () => {
   });
 
   test("rejects release from an address with no name", async () => {
-    assert.equal(await registry.expectRevert("release", [], { from: account(3) }), "Registry: no name");
+    assert.equal(
+      await registry.expectRevert("release", [], { from: account(3) }),
+      "Registry: no name"
+    );
   });
 
   test("emits Registered and Released", async () => {

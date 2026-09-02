@@ -19,7 +19,10 @@ const CHAIN_IDS = { base: 8453, sepolia: 84532 };
  */
 function standardJsonInput() {
   const sources = {};
-  for (const file of fs.readdirSync(CONTRACTS_DIR).filter((f) => f.endsWith(".sol")).sort()) {
+  for (const file of fs
+    .readdirSync(CONTRACTS_DIR)
+    .filter((f) => f.endsWith(".sol"))
+    .sort()) {
     sources[file] = { content: fs.readFileSync(path.join(CONTRACTS_DIR, file), "utf8") };
   }
   return {

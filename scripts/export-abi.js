@@ -19,10 +19,7 @@ function exportAbis() {
   for (const artifact of artifacts) {
     const file = `${artifact.name}.json`;
     current.add(file);
-    fs.writeFileSync(
-      path.join(OUT_DIR, file),
-      JSON.stringify(artifact.abi, null, 2) + "\n"
-    );
+    fs.writeFileSync(path.join(OUT_DIR, file), JSON.stringify(artifact.abi, null, 2) + "\n");
   }
 
   let removed = 0;

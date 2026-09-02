@@ -78,7 +78,9 @@ class Contract {
     });
     const exec = res.execResult;
     return {
-      error: exec.exceptionError ? revertReason(exec.returnValue) ?? exec.exceptionError.error : null,
+      error: exec.exceptionError
+        ? (revertReason(exec.returnValue) ?? exec.exceptionError.error)
+        : null,
       returnValue: exec.returnValue,
       gasUsed: exec.executionGasUsed,
       logs: this.#decodeLogs(exec.logs || []),
