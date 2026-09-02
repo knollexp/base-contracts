@@ -12,8 +12,14 @@
     "format": "prettier --write .",
     "format:check": "prettier --check ."
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "solidity",
+    "base",
+    "ethereum",
+    "smart-contracts",
+    "evm"
+  ],
+  "author": "Sebastian (knollexp)",
   "license": "MIT",
   "type": "commonjs",
   "dependencies": {
@@ -28,5 +34,23 @@
     "@ethereumjs/vm": "^10.1.3",
     "prettier": "^3.9.6",
     "prettier-plugin-solidity": "^2.4.1"
-  }
+  },
+  "engines": {
+    "node": ">=20.12"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/knollexp/base-contracts.git"
+  },
+  "bugs": {
+    "url": "https://github.com/knollexp/base-contracts/issues"
+  },
+  "homepage": "https://github.com/knollexp/base-contracts#readme",
+  "files": [
+    "contracts",
+    "abi",
+    "compile.js",
+    "deploy.js",
+    "scripts"
+  ]
 }
