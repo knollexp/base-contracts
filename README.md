@@ -1,5 +1,9 @@
 # base-contracts
 
+[![CI](https://github.com/knollexp/base-contracts/actions/workflows/ci.yml/badge.svg)](https://github.com/knollexp/base-contracts/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Base](https://img.shields.io/badge/deployed-Base%20mainnet-0052FF)](docs/addresses.md)
+
 Eleven small, self-contained Solidity contracts and a minimal deploy script for
 Base. No framework, no imports, no proxies, no funds held: every contract is
 non-payable and has an argument-less constructor.
