@@ -7,7 +7,8 @@
     "test": "node --test \"test/*.test.js\"",
     "deploy": "node deploy.js --network base",
     "abi": "node scripts/export-abi.js",
-    "gas": "node scripts/gas-report.js"
+    "gas": "node scripts/gas-report.js",
+    "verify": "node scripts/verify.js"
   },
   "keywords": [],
   "author": "",
