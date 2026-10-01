@@ -24,7 +24,7 @@
   "type": "commonjs",
   "dependencies": {
     "ethers": "^6.17.0",
-    "solc": "^0.8.36"
+    "solc": "^0.8.37"
   },
   "devDependencies": {
     "@ethereumjs/block": "^10.1.3",
